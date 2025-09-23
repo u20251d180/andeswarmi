@@ -21,6 +21,15 @@ body{
             justify-self: center;
             
         }
+        .subtitle{
+            color: var(--very-light-pink);
+            font-size: var(--md);
+            font-weight: 500;
+            margin-top: 0;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
        
         .form{
             display: flex;
