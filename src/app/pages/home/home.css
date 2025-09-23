@@ -20,8 +20,12 @@
   border:0; background:transparent; padding:6px; cursor:pointer;
   color: var(--aw-brown); font-size: 22px; line-height: 1;
 }
-.aw-logo{ height: 28px; object-fit: contain; }
 
+.aw-logo {
+  height: auto;
+  width: 140px;
+  object-fit: contain;
+}
 /* HOME */
 .home{ padding: 16px; }
 
