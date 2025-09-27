@@ -6,14 +6,20 @@
   display:grid; gap:10px; margin:12px 0 8px;
   grid-template-columns: 1fr;             /* móvil: apilado */
 }
+.lupa{
+  width:20px; height:20px; margin-right:8px;
+}
+
 .search-wrap{
   background:#f7f7f7; border:1px solid #eee; border-radius:12px;
   padding:10px 12px; display:flex; align-items:center;
+  width: 400px; max-width:100%;               /* ⬅️ ancho inicial del search */
+  margin: 30px;
 }
 .search-wrap input{ border:0; outline:0; background:transparent; width:100%; }
 .order-wrap{ display:flex; align-items:center; gap:8px; }
-.muted{ color:#6b6b6b; }
-.order-btn{ border:0; background:transparent; font-weight:700; cursor:pointer; }
+.muted{ color:black; font-weight:700;}
+.order-btn{ border:0; background:transparent;  cursor:pointer; }
 .caret{ font-size:12px; }
 
 /* Desktop: search con ancho controlado y "Order" a la derecha */

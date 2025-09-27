@@ -9,3 +9,6 @@
             --md:16px;
             --lg: 18px;
         }
+        body {
+  font-family: 'Quicksand', sans-serif;
+}
