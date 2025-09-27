@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
+import { Navbar } from '../../shared/navbar/navbar';   // 👈 importa tu Navbar
 
 @Component({
   selector: 'app-home',
-  imports: [
-    NgOptimizedImage
-  ],
+  standalone: true,
+  imports: [Navbar, NgOptimizedImage],   // 👈 lo añades aquí
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css']
 })
-export class Home {
-
-}
+export class Home { }

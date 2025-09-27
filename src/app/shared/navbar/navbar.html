@@ -1,0 +1,29 @@
+<header class="aw-navbar">
+  <!-- Hamburguesa: solo móvil -->
+  <button class="icon-btn menu-btn" aria-label="Open menu">
+    <img class="icon" src="assets/icons/icon_menu.svg" alt="menu" />
+  </button>
+
+  <!-- Logo -->
+  <a routerLink="/home" class="brand" aria-label="AndesWarmi – Home">
+    <img class="aw-logo" src="assets/logos/andeswarmi-logo.svg" alt="AndesWarmi" />
+  </a>
+
+  <!-- Acciones -->
+  <div class="actions">
+    <a routerLink="/login" class="signin desktop-only">Sign in</a>
+    <button class="icon-btn" aria-label="Cart">
+      <img class="icon" src="assets/icons/icon_shopping_cart.svg" alt="cart" />
+    </button>
+  </div>
+</header>
+
+<!-- Categorías -->
+<nav class="nav-cats desktop-inline">
+  <button class="chip active">All</button>
+  <button class="chip">Clothes</button>
+  <button class="chip">Electronics</button>
+  <button class="chip">Furniture</button>
+  <button class="chip">Toys</button>
+  <button class="chip">Others</button>
+</nav>
