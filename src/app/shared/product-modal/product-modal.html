@@ -1,0 +1,68 @@
+<div class="modal-overlay" *ngIf="product" (click)="onOverlayClick()">
+  <aside
+    class="product-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="product-title"
+    (click)="$event.stopPropagation()"
+  >
+    <button class="close-btn" (click)="closeModal()" aria-label="Cerrar">✕</button>
+
+    <div class="product-body">
+      <div class="image-wrap">
+        <ngb-carousel
+          *ngIf="images && images.length > 1"
+          [showNavigationArrows]="true"
+          [showNavigationIndicators]="true"
+        >
+          <ng-template ngbSlide *ngFor="let img of images; let i = index">
+            <img
+              [src]="img"
+              class="product-img"
+              alt="{{ product.name }} - {{ i + 1 }}"
+              (load)="onImageLoad(i)"
+            />
+            <div *ngIf="!imagesLoaded[i]" class="loading-text">Loading image...</div>
+          </ng-template>
+        </ngb-carousel>
+
+        <ng-container *ngIf="images && images.length === 1">
+          <img
+            [src]="images[0]"
+            class="product-img"
+            alt="{{ product.name }}"
+            (load)="onImageLoad(0)"
+          />
+          <div *ngIf="!imagesLoaded[0]" class="loading-text">Loading image...</div>
+        </ng-container>
+
+        <ng-container *ngIf="(!images || images.length === 0) && product?.image">
+          <img
+            [src]="product.image"
+            class="product-img"
+            alt="{{ product.name }}"
+            (load)="onImageLoad(0)"
+          />
+          <div *ngIf="!imagesLoaded[0]" class="loading-text">Loading image...</div>
+        </ng-container>
+
+        <ng-container *ngIf="(!images || images.length === 0) && !product?.image">
+          <div class="no-image">No image</div>
+        </ng-container>
+      </div>
+
+      <div class="product-info">
+        <h2 id="product-title">{{ product.name }}</h2>
+        <p class="price">$ {{ product.price }}</p>
+        <p class="desc">{{ product.description }}</p>
+      </div>
+    </div>
+
+    <div class="product-footer">
+      <button class="add-cart-btn" aria-label="Add to cart">
+        <img src="assets/icons/bt_add_to_cart.svg" alt="" class="btn-icon" />
+        Add to cart
+      </button>
+    </div>
+  </aside>
+</div>

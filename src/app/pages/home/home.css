@@ -1,5 +1,10 @@
 :root{ --max:1200px; }
-.container{ width:100%; max-width:var(--max); margin:0 auto; padding:0 16px; }
+.container{
+  width:100%; 
+  max-width:var(--max); 
+  margin:0 auto; 
+  padding:0 16px; 
+}
 
 /* Topbar */
 .topbar{
@@ -16,11 +21,40 @@
   width: 400px; max-width:100%;               /* ⬅️ ancho inicial del search */
   margin: 30px;
 }
-.search-wrap input{ border:0; outline:0; background:transparent; width:100%; }
-.order-wrap{ display:flex; align-items:center; gap:8px; }
-.muted{ color:black; font-weight:700;}
-.order-btn{ border:0; background:transparent;  cursor:pointer; }
-.caret{ font-size:12px; }
+.search-wrap input{
+   border:0; outline:0;
+    background:transparent;
+     width:100%;
+     }
+.order-wrap{ 
+  display:flex; 
+  align-items:center; 
+  gap:8px;
+ }
+.muted{
+   color:black;
+    font-weight:700;
+  }
+.order-btn{
+   border:0; 
+  background:transparent;  
+  cursor:pointer;
+ }
+.order-select{ padding:8px 10px; 
+  border-radius:8px;
+border: none;
+outline: none;
+    background:#fff; 
+    font-size:15px;
+   }
+.caret{ font-size:12px;
+ }
+
+/* Chips de categorías */
+.chips{ display:flex; gap:8px; align-items:center; margin:8px 0; }
+.chip{ background:transparent; border:1px solid #eee; padding:6px 10px; border-radius:10px; cursor:pointer; }
+.chip.active{ background:var(--aw-brown, #523B2B); color:var(--aw-cream, #F5E9DD); border-color:transparent; }
+.results-muted{ color:#666; font-size:13px; display:inline-flex; align-items:center; }
 
 /* Desktop: search con ancho controlado y "Order" a la derecha */
 @media (min-width:1024px){
@@ -39,7 +73,7 @@
 
 /* Card (puedes conservar los tuyos) */
 .product-card{ border:1px solid #eee; border-radius:12px; background:#fff; overflow:hidden; }
-.product-card > img{ width:100%; height:240px; object-fit:cover; background:#fafafa; }
+.product-card > img{ width:100%; height:240px; object-fit:contain; background:#fafafa; }
 .product-info{ display:flex; align-items:center; justify-content:space-between; padding:12px; }
 .meta .price{ margin:0; font-weight:700; }
 .meta .name{ margin:4px 0 0; color:#666; }

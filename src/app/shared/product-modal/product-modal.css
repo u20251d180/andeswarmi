@@ -1,0 +1,193 @@
+/* Overlay semitransparente que cubre la pantalla */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: flex-end; /* alinear drawer a la derecha */
+  align-items: stretch;
+  z-index: 1000;
+}
+
+/* Drawer derecho */
+.product-modal {
+  background: #fff;
+  width: 380px; /* ancho del drawer */
+  max-width: 42%;
+  height: 100vh;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  overflow-y: auto;
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Imagen */
+.image-wrap { text-align: center; }
+.product-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Controles del carrusel (flechas) */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #eee;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  z-index: 2;
+}
+.nav.left { left: calc(100% - 340px); /* posicion relativa dentro del drawer */ }
+.nav.right { right: 16px; }
+
+/* Dots */
+.dots { display:flex; gap:8px; justify-content:center; margin-top:8px; }
+.dot { width:10px; height:10px; border-radius:50%; background:#ddd; border:0; cursor:pointer; }
+.dot.active { background:#5c4033; }
+
+/* Botón de cerrar (círculo) */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #fff;
+  border: 1px solid #eee;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Información */
+.product-info h2 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 1.35rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.price {
+  font-weight: bold;
+  color: #5c4033;
+  margin: 0.25rem 0 1rem;
+}
+
+.desc {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Footer con botón grande */
+.product-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-cart-btn {
+  background: #5c4033; /* marrón principal */
+  color: #fff;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.add-cart-btn .btn-icon { width: 20px; height: 20px; filter: invert(1) brightness(2); }
+
+/* Animación */
+@keyframes slideIn {
+  from { transform: translateX(12px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Estilos específicos para ngb-carousel dentro del drawer */
+.product-modal .carousel {
+  width: 100%;
+  background: transparent;
+  margin-bottom: 8px;
+}
+
+.product-modal .carousel-inner { display: block; }
+
+.product-modal .carousel-item { display: block; }
+.product-modal .carousel-item img { display: block; width: 100%; max-height: 320px; object-fit: contain; border-radius: 8px; margin: 0 auto; }
+
+.loading-text { text-align:center; color:#999; font-size:0.9rem; margin-top:8px; }
+
+/* Controles prev/next (sobrescribimos los estilos por defecto) */
+.product-modal .carousel-control-prev,
+.product-modal .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  opacity: 1;
+}
+.product-modal .carousel-control-prev { left: 12px; }
+.product-modal .carousel-control-next { right: 12px; }
+
+/* Iconos dentro de los botones (Bootstrap usa pseudo o .carousel-control-prev-icon) */
+.product-modal .carousel-control-prev-icon,
+.product-modal .carousel-control-next-icon {
+  background-color: transparent !important;
+  width: 18px; height: 18px;
+  display: inline-block;
+  color: #5c4033; /* usar color del theme */
+  font-size: 20px; line-height: 18px; text-align: center;
+}
+
+/* Indicadores (dots) */
+.product-modal .carousel-indicators {
+  position: static; /* mover fuera del bottom default */
+  display: flex; justify-content: center; gap: 8px; padding: 8px 0 0; margin: 0;
+}
+.product-modal .carousel-indicators [data-bs-target],
+.product-modal .carousel-indicators li,
+.product-modal .carousel-indicators button {
+  width: 10px; height: 10px; border-radius: 50%; background: #ddd; border: none; padding: 0;
+}
+.product-modal .carousel-indicators .active {
+  background: #5c4033;
+}
+
+/* Ajustes móviles: hacer imagen algo más alta si hay espacio */
+@media (max-width: 480px) {
+  .product-modal { width: 92%; max-width: 100%; }
+  .product-modal .carousel-item img { max-height: 420px; }
+}

@@ -3,95 +3,54 @@
   <div class="topbar">
     <div class="search-wrap">
       <img class="lupa" src="assets/icons/lupa.svg" alt="lupa" />
-      <input type="search" placeholder="Search product" aria-label="Search product" />
+      <input
+        type="search"
+        placeholder="Search product"
+        aria-label="Search product"
+        [value]="searchTerm"
+        (input)="onSearch($any($event.target).value)"
+      />
     </div>
 
     <div class="order-wrap">
       <span class="muted">Order:</span>
-      <button class="order-btn">Most recent <span class="caret">▾</span></button>
+      <select
+        class="order-select"
+        [value]="sortOption"
+        (change)="onSortChange($any($event.target).value)"
+      >
+        <option value="recent">Más recientes</option>
+        <option value="bestsellers">Más vendidos</option>
+        <option value="price-asc">Menor precio</option>
+        <option value="price-desc">Mayor precio / Exclusivos</option>
+      </select>
     </div>
   </div>
+  <div class="container" style="margin: 10px 16px; align-items: center; display: flex; gap: 12px">
+    <div class="results-muted">{{ filteredProducts.length }} resultados</div>
+  </div>
 
+  <!-- Productos -->
   <section class="cards-container">
-    <article class="product-card">
-      <img
-        src="assets/img/cardigan-de-lana-de-alpaca.png"
-        alt="Cardigan de lana de Alpaca creamy"
-      />
-      <div class="product-info">
-        <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Cardigan de lana Creamy</p>
-        </div>
-        <button class="cart-btn" aria-label="Add to cart">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
-        </button>
-      </div>
-    </article>
+    <article
+      class="product-card"
+      *ngFor="let product of filteredProducts"
+      (click)="openModal(product, $event)"
+    >
+      <img [src]="product.image" [alt]="product.name" />
 
-    <article class="product-card">
-      <img src="assets/img/gorro-de-alpaca-FairIsle.png" alt="Gorro de alpaca Fair Isle" />
       <div class="product-info">
         <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Gorro de Alpaca</p>
+          <p class="price">$ {{ product.price.toFixed(2) }}</p>
+          <p class="name">{{ product.name }}</p>
         </div>
-        <button class="cart-btn" aria-label="Add to cart">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
-        </button>
-      </div>
-    </article>
-
-    <article class="product-card">
-      <img src="assets/img/poncho-andino-tradicional.png" alt="Poncho andino tradicional" />
-      <div class="product-info">
-        <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Poncho Andino</p>
-        </div>
-        <button class="cart-btn" aria-label="Add to cart">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
-        </button>
-      </div>
-    </article>
-
-    <article class="product-card">
-      <img src="assets/img/poncho-de-alpaca-taupe.png" alt="Alpaca poncho taupe" />
-      <div class="product-info">
-        <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Poncho Alpaca Taupe</p>
-        </div>
-        <button class="cart-btn" aria-label="Add to cart">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
-        </button>
-      </div>
-    </article>
-
-    <article class="product-card">
-      <img src="assets/img/poncho-de-alpaca-taupe.png" alt="Poncho de Alpaca Taupe" />
-      <div class="product-info">
-        <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Poncho Alpaca Taupe</p>
-        </div>
-        <button class="cart-btn" aria-label="Add to cart">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
-        </button>
-      </div>
-    </article>
-
-    <article class="product-card">
-      <img src="assets/img/sueter-tradicional-mostaza.png" alt="Traditional sweater" />
-      <div class="product-info">
-        <div class="meta">
-          <p class="price">$ 120,00</p>
-          <p class="name">Cardigan</p>
-        </div>
-        <button class="cart-btn" aria-label="Add to cart">
+        <button class="cart-btn" aria-label="Add to cart" (click)="$event.stopPropagation()">
           <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
         </button>
       </div>
     </article>
   </section>
 </main>
+
+<!-- Modal de producto -->
+<app-product-modal [product]="selectedProduct" (close)="closeModal()"></app-product-modal>
