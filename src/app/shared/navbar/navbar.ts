@@ -1,18 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, NgIf],
+  imports: [RouterLink, NgIf],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
 export class Navbar {
   sidebarOpen = false;
-//Este metodo es para abrir y cerrar el sidebar, una vez que se haga click en el boton del navbar de hamburguesa
+  userMenuOpen = false;
+
+  constructor(public auth: AuthService) {}
+
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  logout() {
+    this.auth.logout();
+    this.toggleSidebar();
+  }
+
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  // 🔹 Cierra el dropdown si haces click fuera
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.user-menu')) {
+      this.userMenuOpen = false;
+    }
   }
 }

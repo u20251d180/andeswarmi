@@ -20,14 +20,13 @@ export class Home {
 
   products: any[] = [
     {
-      name: 'Cardigan de lana Creamy',
+      name: 'Cardigan de punto ',
       price: 89.90,
-      image: 'assets/img/cardigan-de-lana-de-alpaca.png',
+      image: 'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
       images: [
-        'assets/img/cardigan-de-lana-de-alpaca.png',
-        'assets/img/cardigan-image2.png'
+        'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
       ],
-      description: 'Cardigan tejido a mano con lana andina 100% natural.',
+      description: 'Cardigan de punto con patrones geométricos, hecho a mano con lana de alpaca peruana.',
       sold: 48,
       exclusive: false,
       createdAt: '2025-09-10T10:00:00Z'
@@ -38,7 +37,6 @@ export class Home {
       image: 'assets/img/gorro-de-alpaca-FairIsle.png',
       images: [
         'assets/img/gorro-de-alpaca-FairIsle.png',
-        'assets/img/gorro-image2.png'
       ],
       description: 'Gorro abrigador hecho con lana de alpaca peruana.',
       sold: 120,
@@ -66,10 +64,80 @@ export class Home {
       createdAt: '2025-07-15T08:00:00Z'
     },
     {
-      name: 'Cardigan',
+      name: 'Poncho Beige Tradicional',
+      price: 89.90,
+      image: 'assets/img/Poncho_Beige_con_Patrones_Geometricos.png',
+      images: ['assets/img/Poncho_Beige_con_Patrones_Geometricos.png'],
+      description: 'Poncho beige con patrones geométricos, hecho a mano con lana de alpaca.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Cardigan Tradicional',
       price: 79.90,
       image: 'assets/img/sueter-tradicional-mostaza.png',
       images: ['assets/img/sueter-tradicional-mostaza.png'],
+      description: 'Cardigan tradicional color mostaza, cómodo y moderno.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Polera Beige Unisex',
+      price: 69.90,
+      image: 'assets/img/Polera_beige_de_alpaca_unisex.png',
+      images: ['assets/img/Polera_beige_de_alpaca_unisex.png'],
+      description: 'Polera beige unisex hecha con lana de alpaca, suave y cálida.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Ruana Andina Multicolor',
+      price: 99.90,
+      image: 'assets/img/Ruana_Andina_Multicolor_de_Alpaca.png',
+      images: ['assets/img/Ruana_Andina_Multicolor_de_Alpaca.png'],
+      description: 'Ruana andina multicolor hecha con lana de alpaca. Perfecta para abrigarte con estilo. Hecho a mano.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Poncho Tierra Calida',
+      price: 129.90,
+      image: 'assets/img/Poncho_Tradicional-Tierra_Calida.png',
+      images: ['assets/img/Poncho_Tradicional-Tierra_Calida.png'],
+      description: 'Poncho tradicional con diseño andino. Ideal para cualquier ocasión. Hecho a mano con lana de alpaca.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Suéter Beige Fair Isle',
+      price: 59.90,
+      image: 'assets/img/Jersey_beige_con_patron_geometrico.png',
+      images: ['assets/img/Jersey_beige_con_patron_geometrico.png'],
+      description: 'Suéter beige con patrón Fair Isle, hecho con lana de alpaca peruana.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Bufanda Inti Raymi',
+      price: 99.90,
+      image: 'assets/img/Bufanda_Inti_Raymi.png',
+      images: ['assets/img/Bufanda_Inti_Raymi.png'],
+      description: 'Bufanda tejida a mano con diseño Inti Raymi, hecha con lana de alpaca peruana.',
+      sold: 5,
+      exclusive: true,
+      createdAt: '2025-09-25T14:00:00Z'
+    },
+      {
+      name: 'Suéter Tradicional Rojo',
+      price: 89.90,
+      image: 'assets/img/sueter-tradicional-rojo.png',
+      images: ['assets/img/sueter-tradicional-rojo.png'],
       description: 'Cardigan tradicional color mostaza, cómodo y moderno.',
       sold: 5,
       exclusive: true,

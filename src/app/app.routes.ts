@@ -11,4 +11,5 @@ export const routes: Routes = [
     {path : 'recover-password', component: Recovery},
     {path : 'register', component: Register},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
+    
 ];

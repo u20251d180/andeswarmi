@@ -65,6 +65,53 @@ body {
   font-weight: 600;
   font-size: 14px;
 }
+.user-menu {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #523b2b;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #523b2b;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background: #f6f6f6;
+}
+
+.logout-btn {
+  font-size: 0.9rem;
+  color: #523b2b;
+}
+
 
 /* ======================= */
 /* NAVBAR LAYOUT */
@@ -225,7 +272,8 @@ border: none;
   color: var(--aw-brown);
   text-decoration: none;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
+  padding-top: 20px;
 }
 
 /* ======================= */

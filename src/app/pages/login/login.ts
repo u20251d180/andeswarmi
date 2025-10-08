@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login {
+  email = '';
+  password = '';
 
+  constructor(private auth: AuthService, private router: Router) {}
+
+  onSubmit() {
+    this.auth.login({ email: this.email });
+    this.router.navigateByUrl('/');
+  }
 }

@@ -4,11 +4,11 @@
       <img src="assets/logos/andeswarmi-logo.svg" alt="logo" class="logo" />
       <p class="subtitle">Ingrese su correo electrónico para recuperar su contraseña</p>
       <form action="/" class="form">
-        <label for="email" class="label">Email</label>
+        <label for="email" class="label" style="color: #523b2b">Email address</label>
         <input type="text" id="email" placeholder="Ingrese su email" class="input input-email" />
 
         <input type="submit" value="Recuperar" class="primary-button login-button" />
-        <a href="#" routerLink="/login">Regresar al login</a>
+        <a [routerLink]="['/login']">Regresar al login</a>
       </form>
     </div>
   </div>
