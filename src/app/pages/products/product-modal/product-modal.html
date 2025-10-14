@@ -6,9 +6,12 @@
     aria-labelledby="product-title"
     (click)="$event.stopPropagation()"
   >
+    <!-- Botón de cierre -->
     <button class="close-btn" (click)="closeModal()" aria-label="Cerrar">✕</button>
 
+    <!-- Contenido principal -->
     <div class="product-body">
+      <!-- Imagen / Carrusel -->
       <div class="image-wrap">
         <ngb-carousel
           *ngIf="images && images.length > 1"
@@ -26,7 +29,8 @@
           </ng-template>
         </ngb-carousel>
 
-        <ng-container *ngIf="images && images.length === 1">
+        <!-- Imagen única -->
+        <ng-container *ngIf="images?.length === 1">
           <img
             [src]="images[0]"
             class="product-img"
@@ -36,7 +40,8 @@
           <div *ngIf="!imagesLoaded[0]" class="loading-text">Loading image...</div>
         </ng-container>
 
-        <ng-container *ngIf="(!images || images.length === 0) && product?.image">
+        <!-- Fallback: imagen principal -->
+        <ng-container *ngIf="!images?.length && product?.image">
           <img
             [src]="product.image"
             class="product-img"
@@ -46,21 +51,24 @@
           <div *ngIf="!imagesLoaded[0]" class="loading-text">Loading image...</div>
         </ng-container>
 
-        <ng-container *ngIf="(!images || images.length === 0) && !product?.image">
-          <div class="no-image">No image</div>
+        <!-- Sin imagen -->
+        <ng-container *ngIf="!images?.length && !product?.image">
+          <div class="no-image">No image available</div>
         </ng-container>
       </div>
 
+      <!-- Información del producto -->
       <div class="product-info">
-        <h2 id="product-title">{{ product.name }}</h2>
         <p class="price">$ {{ product.price }}</p>
+        <h2 id="product-title">{{ product.name }}</h2>
         <p class="desc">{{ product.description }}</p>
       </div>
     </div>
 
+    <!-- Footer con botón -->
     <div class="product-footer">
-      <button class="add-cart-btn" aria-label="Add to cart">
-        <img src="assets/icons/bt_add_to_cart.svg" alt="" class="btn-icon" />
+      <button class="add-cart-btn" aria-label="Add to cart" (click)="addToCart(product)">
+        <img src="assets/icons/bt_add_to_cart.svg" alt="cart" class="btn-icon" />
         Add to cart
       </button>
     </div>

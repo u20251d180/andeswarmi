@@ -1,0 +1,178 @@
+/* =========================== */
+/* 🔹 MODAL — Versión mejorada */
+/* =========================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+/* 🔸 Modal contenedor */
+.product-modal {
+  background: #fff;
+  width: 620px; /* antes 400px */
+  height: 100vh;
+  padding: 40px 36px 28px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+  animation: slideInRight 0.3s ease forwards;
+  border-radius: 12px 0 0 12px;
+}
+
+/* 🔸 Imagen */
+.image-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  height: 420px; /* 🔹 altura fija y consistente para desktop */
+}
+
+.product-img {
+  max-width: 90%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  display: block;
+}
+
+
+/* 🔸 Info */
+.product-info {
+  text-align: left;
+  padding: 0 10px;
+}
+
+.product-info h2 {
+  font-size: 1.5rem;
+  color: #523b2b;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #523b2b;
+  margin-bottom: 12px;
+}
+
+.desc {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 90%;
+}
+
+/* 🔸 Footer */
+.product-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.add-cart-btn {
+  width: 100%;
+  background: #523b2b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-cart-btn:hover {
+  background: #3e2e21;
+}
+
+/* 🔸 Botón cerrar */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #523b2b;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ========================== */
+/* 📱 VERSIÓN MÓVIL */
+/* ========================== */
+@media (max-width: 768px) {
+  .modal-overlay {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-modal {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 20px;
+    animation: slideUp 0.3s ease forwards;
+  }
+
+.product-info{
+  padding: 20px 20px;
+}
+
+  @media (max-width: 768px) {
+  .image-wrap {
+    height: 340px; /* 🔹 más baja para pantallas pequeñas */
+  }
+}
+
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .product-info h2 {
+    font-size: 1.2rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .desc {
+    font-size: 0.9rem;
+  }
+
+  .add-cart-btn {
+    font-size: 0.95rem;
+    padding: 12px 0;
+  }
+}

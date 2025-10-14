@@ -1,11 +1,14 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from '../../../core/cart/cart.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'app-product-modal',
-  imports: [NgIf, NgFor, NgbCarouselModule],
+  imports: [CommonModule, NgIf, NgFor, NgbCarouselModule],
   templateUrl: './product-modal.html',
   styleUrls: ['./product-modal.css']
 })
@@ -26,7 +29,17 @@ export class ProductModalComponent implements OnChanges {
     }
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private cart: CartService, public auth: AuthService, private router: Router) {}
+
+  addToCart(product: any) {
+    if (!product) return;
+    if (!this.auth.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.cart.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
+    this.cart.openDrawer();
+  }
 
   setupImages() {
     if (!this.product) {

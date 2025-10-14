@@ -10,6 +10,7 @@
 
 body {
   font-family: 'Quicksand', sans-serif;
+  margin: 0;
 }
 
 .aw-navbar,
@@ -34,29 +35,58 @@ body {
   display: block;
 }
 
-.aw-logo {
-  height: 30px;
-  display: block;
+/* ======================= */
+/* NAVBAR LAYOUT */
+/* ======================= */
+.aw-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
+
+/* ======================= */
+/* LOGO / BRAND */
+/* ======================= */
 
 .brand {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  justify-self: center;
   text-decoration: none;
 }
 
-.brand-text {
-  font-size: 18px;
-  font-weight: bold;
+.brand-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aw-logo {
+  height: 28px;
+  display: block;
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--aw-brown);
 }
+
+/* ======================= */
+/* USER / ACTIONS */
+/* ======================= */
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24px;
+  white-space: nowrap;
 }
 
 .signin {
@@ -64,24 +94,27 @@ body {
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
+  white-space: nowrap;
+  display: inline-block;
 }
+
 .user-menu {
-  position: relative;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .user-email {
-  font-size: 0.9rem;
-  color: #523b2b;
+  font-size: 0.95rem;
+  color: var(--aw-brown);
+  white-space: nowrap;
 }
 
 .user-dropdown {
   position: absolute;
-  top: 120%;
-  right: 0;
+  top: 100%;
+
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -90,6 +123,7 @@ body {
   flex-direction: column;
   min-width: 160px;
   z-index: 10;
+  margin-left: 40px;
 }
 
 .dropdown-item {
@@ -99,7 +133,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  color: #523b2b;
+  color: var(--aw-brown);
   text-decoration: none;
 }
 
@@ -107,30 +141,8 @@ body {
   background: #f6f6f6;
 }
 
-.logout-btn {
-  font-size: 0.9rem;
-  color: #523b2b;
-}
-
-
 /* ======================= */
-/* NAVBAR LAYOUT */
-/* ======================= */
-
-.aw-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: #fff;
-  border-bottom: 1px solid #eee;
-  height: 56px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-}
-
-/* ======================= */
-/* CATEGORIES */
+/* CATEGORIES (DESKTOP ONLY) */
 /* ======================= */
 
 .nav-cats {
@@ -138,30 +150,28 @@ body {
   display: flex;
   justify-content: center;
   gap: 12px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
 }
 
 .chip {
   padding: 8px 14px;
-border: none;
+  border: none;
   background: #fff;
   color: var(--aw-brown);
   white-space: nowrap;
-  font-size: 14px;
+  font-size: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
 .chip.active {
-
-  border-radius: 10px; /* ajustar a 10px como pidió */
-  padding: 6px 16px; /* asegurar padding consistente */
+  border-radius: 10px;
+  padding: 6px 16px;
   font-weight: 700;
   font-size: 14px;
   border: 1.5px solid var(--aw-brown);
 }
+
 .chip.active:hover {
   background: var(--aw-brown);
   color: var(--aw-cream);
@@ -169,111 +179,134 @@ border: none;
 }
 
 /* ======================= */
-/* SEARCH + ORDER */
-/* ======================= */
-
-.search-order-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 16px auto;
-}
-
-.search-input {
-  display: flex;
-  align-items: center;
-  background: #f6f6f6;
-  border-radius: 12px;
-  padding: 8px 12px;
-  flex-grow: 1;
-  max-width: 400px;
-}
-
-.search-input img {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-}
-
-.search-input input {
-  border: none;
-  background: transparent;
-  outline: none;
-  width: 100%;
-}
-
-.order-select {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-}
-
-.order-select select {
-  border: none;
-  font-weight: 500;
-  background: transparent;
-  color: #000;
-}
-
-/* ======================= */
-/* SIDEBAR */
+/* SIDEBAR (MOBILE MENU) */
 /* ======================= */
 
 .sidebar-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 99;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.sidebar.open ~ .sidebar-backdrop {
+  opacity: 1;
+  visibility: visible;
 }
 
 .sidebar {
   position: fixed;
   top: 0;
-  left: -280px;
-  width: 260px;
+  left: 0;
+  transform: translateX(-100%);
+  width: 100%;
+  max-width: 320px;
   height: 100vh;
   background: #fff;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: left 0.3s ease-in-out;
-  z-index: 100;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 34px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
 }
 
 .sidebar.open {
-  left: 0;
+  transform: translateX(0);
 }
 
 .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 34px;
+}
+
+.sidebar-header h3 {
+  color: var(--aw-brown);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
 }
 
 .close-btn {
   border: none;
   background: none;
-  font-size: 20px;
+  font-size: 22px;
+  color: var(--aw-brown);
   cursor: pointer;
+  line-height: 1;
 }
 
 .sidebar-menu {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 34px;
+  margin-bottom: 20px;
 }
 
 .sidebar-link {
   color: var(--aw-brown);
   text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.sidebar-link:hover {
+  color: #3e2e21;
+}
+
+/* Separador */
+.sidebar-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+/* Zona de usuario / login */
+.sidebar-user,
+.sidebar-guest {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-user .sidebar-link,
+.sidebar-guest .sidebar-link {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sidebar-email {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  color: var(--aw-brown);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  color: #3e2e21;
+}
+
+/* Bloquear scroll cuando el sidebar está abierto */
+body.sidebar-open {
+  overflow: hidden;
 }
 
 /* ======================= */
@@ -282,35 +315,75 @@ border: none;
 
 /* Desktop only */
 @media (min-width: 1024px) {
-  .nav-cats,
-  .search-order-container,
-  .brand-text,
-  .signin {
-    display: flex;
-  }
-
-  .sidebar,
-  .sidebar-backdrop {
-    display: none !important;
+  .nav-cats {
+    display: flex !important;
   }
 
   .menu-btn {
     display: none;
   }
+
+  .sidebar,
+  .sidebar-backdrop {
+    display: none !important;
+  }
 }
 
-/* Mobile only */
+/* Mobile */
 @media (max-width: 1023px) {
-  .nav-cats,
-  .search-order-container,
-  .brand-text,
-  .signin {
+  .nav-cats {
     display: none !important;
   }
 
- .sidebar-link{color: var(--aw-brown)} 
-  .sidebar,
-  .sidebar-backdrop {
-    display: block;
+  .menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .aw-navbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+  }
+
+  .menu-btn {
+    justify-self: start;
+  }
+
+  .brand {
+    justify-self: center;
+  }
+
+  .actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .signin {
+    font-size: 13px;
+  }
+
+  /* Ocultar el email en mobile (se muestra dentro del sidebar) */
+  .user-email{ display:none; }
+}
+
+/* Pequeños ajustes */
+@media (max-width: 400px) {
+  .sidebar {
+    max-width: 280px;
+    padding: 20px;
+  }
+
+  .sidebar-link {
+    font-size: 0.95rem;
+  }
+
+  .sidebar-header h3 {
+    font-size: 0.9rem;
   }
 }

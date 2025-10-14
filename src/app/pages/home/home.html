@@ -1,3 +1,5 @@
+<!-- src/app/pages/home/home.html -->
+
 <main class="container">
   <!-- Topbar: Search + Order -->
   <div class="topbar">
@@ -26,31 +28,36 @@
       </select>
     </div>
   </div>
+
+  <!-- Resultados -->
   <div class="container" style="margin: 10px 16px; align-items: center; display: flex; gap: 12px">
     <div class="results-muted">{{ filteredProducts.length }} resultados</div>
   </div>
 
-  <!-- Productos -->
+  <!-- Grid de productos -->
   <section class="cards-container">
-    <article
+    <div
       class="product-card"
       *ngFor="let product of filteredProducts"
-      (click)="openModal(product, $event)"
+      (click)="openProduct(product)"
     >
       <img [src]="product.image" [alt]="product.name" />
-
       <div class="product-info">
         <div class="meta">
-          <p class="price">$ {{ product.price.toFixed(2) }}</p>
+          <p class="price">$ {{ product.price }}</p>
           <p class="name">{{ product.name }}</p>
         </div>
-        <button class="cart-btn" aria-label="Add to cart" (click)="$event.stopPropagation()">
-          <img class="icon-40" src="assets/icons/bt_add_to_cart.svg" alt="Add to cart" />
+        <button class="cart-btn" (click)="addToCart(product, $event)">
+          <img src="assets/icons/bt_add_to_cart.svg" alt="cart" class="icon-40" />
         </button>
       </div>
-    </article>
+    </div>
   </section>
-</main>
 
-<!-- Modal de producto -->
-<app-product-modal [product]="selectedProduct" (close)="closeModal()"></app-product-modal>
+  <!-- 🖥️ Modal del producto (solo desktop) -->
+  <app-product-modal
+    *ngIf="showModal && selectedProduct"
+    [product]="selectedProduct"
+    (close)="closeModal()"
+  ></app-product-modal>
+</main>

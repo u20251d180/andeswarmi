@@ -1,155 +1,45 @@
 import { Component } from '@angular/core';
-import { NgIf, NgFor, NgOptimizedImage } from '@angular/common';
-import { Navbar } from '../../shared/navbar/navbar';
-import { ProductModalComponent } from '../../shared/product-modal/product-modal';
+import { NgFor, CommonModule } from '@angular/common';
+import { ProductModalComponent } from '../products/product-modal/product-modal';
+import { PRODUCTS } from '../../data/products';
+import { Router } from '@angular/router';
+import { CartService } from '../../core/cart/cart.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, Navbar, NgOptimizedImage, ProductModalComponent],
+  imports: [CommonModule, NgFor, ProductModalComponent],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 export class Home {
   selectedProduct: any = null;
 
+  showModal: boolean = false;
+
   searchTerm: string = '';
   // opciones de ordenamiento: 'recent' | 'bestsellers' | 'price-asc' | 'price-desc'
   sortOption: string = 'recent';
   filteredProducts: any[] = [];
 
-  products: any[] = [
-    {
-      name: 'Cardigan de punto ',
-      price: 89.90,
-      image: 'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
-      images: [
-        'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
-      ],
-      description: 'Cardigan de punto con patrones geométricos, hecho a mano con lana de alpaca peruana.',
-      sold: 48,
-      exclusive: false,
-      createdAt: '2025-09-10T10:00:00Z'
-    },
-    {
-      name: 'Gorro de Alpaca',
-      price: 69.90,
-      image: 'assets/img/gorro-de-alpaca-FairIsle.png',
-      images: [
-        'assets/img/gorro-de-alpaca-FairIsle.png',
-      ],
-      description: 'Gorro abrigador hecho con lana de alpaca peruana.',
-      sold: 120,
-      exclusive: false,
-      createdAt: '2025-09-20T11:30:00Z'
-    },
-    {
-      name: 'Poncho Andino',
-      price: 129.90,
-      image: 'assets/img/poncho-andino-tradicional.png',
-      images: ['assets/img/poncho-andino-tradicional.png'],
-      description: 'Poncho tradicional con diseño andino.',
-      sold: 15,
-      exclusive: true,
-      createdAt: '2025-08-02T09:00:00Z'
-    },
-    {
-      name: 'Poncho Alpaca Taupe',
-      price: 79.90,
-      image: 'assets/img/poncho-de-alpaca-taupe.png',
-      images: ['assets/img/poncho-de-alpaca-taupe.png'],
-      description: 'Poncho de alpaca en color taupe, elegante y cálido.',
-      sold: 30,
-      exclusive: false,
-      createdAt: '2025-07-15T08:00:00Z'
-    },
-    {
-      name: 'Poncho Beige Tradicional',
-      price: 89.90,
-      image: 'assets/img/Poncho_Beige_con_Patrones_Geometricos.png',
-      images: ['assets/img/Poncho_Beige_con_Patrones_Geometricos.png'],
-      description: 'Poncho beige con patrones geométricos, hecho a mano con lana de alpaca.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Cardigan Tradicional',
-      price: 79.90,
-      image: 'assets/img/sueter-tradicional-mostaza.png',
-      images: ['assets/img/sueter-tradicional-mostaza.png'],
-      description: 'Cardigan tradicional color mostaza, cómodo y moderno.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Polera Beige Unisex',
-      price: 69.90,
-      image: 'assets/img/Polera_beige_de_alpaca_unisex.png',
-      images: ['assets/img/Polera_beige_de_alpaca_unisex.png'],
-      description: 'Polera beige unisex hecha con lana de alpaca, suave y cálida.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Ruana Andina Multicolor',
-      price: 99.90,
-      image: 'assets/img/Ruana_Andina_Multicolor_de_Alpaca.png',
-      images: ['assets/img/Ruana_Andina_Multicolor_de_Alpaca.png'],
-      description: 'Ruana andina multicolor hecha con lana de alpaca. Perfecta para abrigarte con estilo. Hecho a mano.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Poncho Tierra Calida',
-      price: 129.90,
-      image: 'assets/img/Poncho_Tradicional-Tierra_Calida.png',
-      images: ['assets/img/Poncho_Tradicional-Tierra_Calida.png'],
-      description: 'Poncho tradicional con diseño andino. Ideal para cualquier ocasión. Hecho a mano con lana de alpaca.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Suéter Beige Fair Isle',
-      price: 59.90,
-      image: 'assets/img/Jersey_beige_con_patron_geometrico.png',
-      images: ['assets/img/Jersey_beige_con_patron_geometrico.png'],
-      description: 'Suéter beige con patrón Fair Isle, hecho con lana de alpaca peruana.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Bufanda Inti Raymi',
-      price: 99.90,
-      image: 'assets/img/Bufanda_Inti_Raymi.png',
-      images: ['assets/img/Bufanda_Inti_Raymi.png'],
-      description: 'Bufanda tejida a mano con diseño Inti Raymi, hecha con lana de alpaca peruana.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    },
-      {
-      name: 'Suéter Tradicional Rojo',
-      price: 89.90,
-      image: 'assets/img/sueter-tradicional-rojo.png',
-      images: ['assets/img/sueter-tradicional-rojo.png'],
-      description: 'Cardigan tradicional color mostaza, cómodo y moderno.',
-      sold: 5,
-      exclusive: true,
-      createdAt: '2025-09-25T14:00:00Z'
-    }
-  ];
+  products: any[] = PRODUCTS;
   
-  constructor(){
+  constructor(private router: Router, private cart: CartService, public auth: AuthService) {
     // Inicializar lista filtrada
     this.filteredProducts = [...this.products];
     // Aplicar orden inicial
     this.applyFilters();
+  }
+
+  addToCart(product: any, event?: MouseEvent) {
+    if (event) event.stopPropagation();
+    if (!this.auth.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.cart.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
+    this.cart.openDrawer();
   }
 
   applyFilters() {
@@ -200,7 +90,25 @@ openModal(product: any, event?: MouseEvent) {
   }, 120);
 }
 
+
+  openProduct(product: any) {
+    const isDesktop = window.innerWidth >= 1024;
+
+    if (isDesktop) {
+      // 🖥️ Desktop: abre modal
+      this.selectedProduct = product;
+      this.showModal = true;
+    } else {
+      // 📱 Mobile: redirige a ProductDetail
+      this.showModal = false;
+      this.router.navigate(['/product', product.id]);
+    }
+  }
+
+
   closeModal() {
     this.selectedProduct = null;
+    this.showModal = false;
   }
+  
 }

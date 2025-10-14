@@ -4,9 +4,18 @@ import { BehaviorSubject } from 'rxjs';
 export interface AwUser {
   email: string;
   name?: string;
+  role?: 'admin' | 'user';
 }
 
+
 const STORAGE_KEY = 'aw_user';
+
+const ADMIN_USER: AwUser = {
+  email: 'admin@andeswarmi.com',
+  name: 'Administrador',
+  role: 'admin'
+};
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -32,6 +41,11 @@ export class AuthService {
     this.userSubject.next(user);
   }
 
+ loginAsAdmin() {
+    this.writeUser(ADMIN_USER);
+    this.userSubject.next(ADMIN_USER);
+  }
+
   logout() {
     this.writeUser(null);
     this.userSubject.next(null);
@@ -43,5 +57,9 @@ export class AuthService {
 
   get isLoggedIn() {
     return !!this.userSubject.value;
+  }
+
+   get isAdmin() {
+    return this.userSubject.value?.role === 'admin';
   }
 }

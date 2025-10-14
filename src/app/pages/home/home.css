@@ -3,23 +3,31 @@
   width:100%; 
   max-width:var(--max); 
   margin:0 auto; 
-  padding:0 16px; 
+  padding:24px 40px; 
 }
 
 /* Topbar */
 .topbar{
-  display:grid; gap:10px; margin:12px 0 8px;
-  grid-template-columns: 1fr;             /* móvil: apilado */
+  display:grid; gap:10px; 
+  margin:12px 0 8px;
+  grid-template-columns: 1fr;  
+  gap: 40px;           /* móvil: apilado */
 }
 .lupa{
-  width:20px; height:20px; margin-right:8px;
+  width:20px; height:20px; 
+  margin-right:8px;
 }
 
 .search-wrap{
-  background:#f7f7f7; border:1px solid #eee; border-radius:12px;
-  padding:10px 12px; display:flex; align-items:center;
-  width: 400px; max-width:100%;               /* ⬅️ ancho inicial del search */
-  margin: 30px;
+  background:#f7f7f7;
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  width:100%;
+  max-width:100%;
+  margin: 0; /* quitar margin grande que provoca overflow en mobile */
 }
 .search-wrap input{
    border:0; outline:0;
@@ -51,10 +59,30 @@ outline: none;
  }
 
 /* Chips de categorías */
-.chips{ display:flex; gap:8px; align-items:center; margin:8px 0; }
-.chip{ background:transparent; border:1px solid #eee; padding:6px 10px; border-radius:10px; cursor:pointer; }
-.chip.active{ background:var(--aw-brown, #523B2B); color:var(--aw-cream, #F5E9DD); border-color:transparent; }
-.results-muted{ color:#666; font-size:13px; display:inline-flex; align-items:center; }
+.chips{ 
+  display:flex; 
+  gap:8px; 
+  align-items:center; 
+  margin:8px 0; 
+}
+.chip{ 
+  background:transparent; 
+  border:1px solid #eee; 
+  padding:6px 10px; 
+  border-radius:10px; 
+  cursor:pointer; 
+}
+.chip.active{ 
+  background:var(--aw-brown, #523B2B); 
+  color:var(--aw-cream, #F5E9DD); 
+  border-color:transparent; 
+}
+.results-muted{ 
+  color:#666; 
+  font-size:13px; 
+  display:inline-flex; 
+  align-items:center;
+ }
 
 /* Desktop: search con ancho controlado y "Order" a la derecha */
 @media (min-width:1024px){
@@ -68,14 +96,76 @@ outline: none;
 .cards-container{
   display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr));
 }
-@media (min-width:768px){ .cards-container{ gap:20px; grid-template-columns: repeat(3, minmax(0,1fr)); } }
-@media (min-width:1024px){ .cards-container{ gap:24px; grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (min-width:768px){ 
+  .cards-container{
+     gap:20px; 
+     grid-template-columns: repeat(3, minmax(0,1fr)); 
+    } 
+
+  }
+@media (min-width:1024px){ 
+  .cards-container{ 
+    gap:24px; 
+    grid-template-columns: repeat(4, minmax(0,1fr)); 
+  } 
+    .icon-40{
+   width:20px; 
+   height:20px;
+    display:block;
+   }
+}
 
 /* Card (puedes conservar los tuyos) */
-.product-card{ border:1px solid #eee; border-radius:12px; background:#fff; overflow:hidden; }
-.product-card > img{ width:100%; height:240px; object-fit:contain; background:#fafafa; }
-.product-info{ display:flex; align-items:center; justify-content:space-between; padding:12px; }
-.meta .price{ margin:0; font-weight:700; }
-.meta .name{ margin:4px 0 0; color:#666; }
-.cart-btn{ border:0; background:transparent; padding:0; cursor:pointer; }
-.icon-40{ width:40px; height:40px; display:block; }
+.product-card{ 
+  border:1px solid #eee; 
+  border-radius:12px; 
+  background:#fff; 
+  overflow:hidden;
+ }
+
+.product-card > img{
+   width:100%;
+   height:240px; 
+   object-fit:contain; 
+   background:#fafafa; 
+  }
+.product-info{
+  display:flex; 
+  align-items:center; 
+  justify-content:space-between; 
+  padding:12px;
+ }
+.meta .price{ 
+  margin:0; 
+  font-weight:700; 
+}
+.meta .name{
+   margin:4px 0 0; 
+   color:#666; 
+  }
+.cart-btn{ 
+  border:0;
+   background:transparent; 
+   padding:0; 
+   cursor:pointer; 
+  }
+.icon-40{
+   width:40px; 
+   height:40px;
+    display:block;
+   }
+
+
+@media (max-width: 768px) {
+  .meta .name {
+    font-size: 14px;   /* 🔹 Tamaño reducido */
+  }
+}
+@media (max-width: 1023px) {
+  .modal-overlay {
+    display: none !important;
+  };
+    :host {
+    display: none !important;
+  }
+}

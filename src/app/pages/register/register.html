@@ -1,23 +1,42 @@
-<body>
-  <div class="login">
-    <div class="form-container">
-      <img src="assets/logos/andeswarmi-logo.svg" alt="logo" class="logo" />
-      <p style="color: #523b2b; font-weight: bold; text-align: center">Crear cuenta</p>
-      <form action="/" class="form">
-        <label for="name" class="label" style="color: #523b2b; font-weight: bold">Nombre</label>
-        <input type="text" id="name" placeholder="Ingrese su nombre" class="input input-name" />
+<div class="login">
+  <div class="form-container">
+    <img src="assets/logos/andeswarmi-logo.svg" alt="logo" class="logo" />
+    <p style="color: #523b2b; font-weight: bold; text-align: center">Crear cuenta</p>
 
-        <label for="email" class="label" style="color: #523b2b; font-weight: bold">Email</label>
-        <input type="text" id="email" placeholder="Ingrese su email" class="input input-email" />
+    <form class="form" (ngSubmit)="onSubmit()">
+      <label for="name" class="label" style="color: #523b2b; font-weight: bold">Nombre</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        placeholder="Ingrese su nombre"
+        class="input input-name"
+      />
 
-        <label for="password" class="label" style="color: #523b2b; font-weight: bold"
-          >Password</label
-        >
-        <input type="password" id="password" placeholder="*******" class="input input-password" />
+      <label for="email" class="label" style="color: #523b2b; font-weight: bold">Email</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="Ingrese su email"
+        class="input input-email"
+      />
 
-        <input type="submit" value="Registrarte" class="primary-button login-button" />
-        <a [routerLink]="['/login']">¿Ya tienes una cuenta?</a>
-      </form>
-    </div>
+      <label for="password" class="label" style="color: #523b2b; font-weight: bold">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="*******"
+        class="input input-password"
+      />
+
+      <input type="submit" value="Registrarte" class="primary-button login-button" />
+
+      <a routerLink="/login">¿Ya tienes una cuenta?</a>
+    </form>
   </div>
-</body>
+</div>

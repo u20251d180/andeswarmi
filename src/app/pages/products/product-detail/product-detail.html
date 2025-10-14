@@ -1,0 +1,23 @@
+<main class="product-page">
+  <section class="product-container">
+    <div class="image-section">
+      <img
+        [src]="product?.image"
+        [alt]="product?.name"
+        class="product-img"
+        (error)="onImageError($event)"
+      />
+    </div>
+
+    <div class="info-section">
+      <p class="price">$ {{ product?.price }}</p>
+      <h1>{{ product?.name }}</h1>
+      <p class="desc">{{ product?.description }}</p>
+
+      <button class="add-cart-btn" (click)="addToCart(product)">
+        <img src="assets/icons/bt_add_to_cart.svg" alt="cart" />
+        Add to cart
+      </button>
+    </div>
+  </section>
+</main>
