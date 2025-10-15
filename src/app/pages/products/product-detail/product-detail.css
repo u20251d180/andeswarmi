@@ -21,7 +21,6 @@
   position: absolute;
   top: 18px;
   right: 18px;
-  background: var(--aw-cream, #F5E9DD);
   border: none;
   width:48px;
   height:48px;
@@ -54,6 +53,13 @@
   object-fit: contain;
   border-radius: 8px;
 }
+.title_product{
+  font-size:1em;
+  color:#3c2d21;
+font-weight: 500;
+  margin-bottom:12px;
+
+}
 
 /* Información */
 .info-section {
@@ -65,7 +71,7 @@
 .info-section h1 {
   font-size: 1.1rem;
   color: #523b2b;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 8px;
 }
 
@@ -121,10 +127,10 @@
 }
 
 .related-section h2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #523b2b;
   margin-bottom: 20px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* Contenedor del slider + flechas */
@@ -229,16 +235,59 @@
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1366px) {
+@media (min-width: 1024px) {
   .product-container {
-    gap: 40px;
-    padding: 30px 20px; /* 🔹 más compacto */
+    max-width: 1200px; /* evita que se estire demasiado */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* la imagen más grande */
+    align-items: center;
+    gap: 60px;
+    padding: 60px 40px;
   }
 
-  .related-section {
-    margin-top: 20px; /* 🔹 reduce el espacio */
+  .image-section {
+    display: flex;
+    justify-content: flex-end; /* centra mejor la imagen */
+  }
+
+  .product-img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+
+  .info-section {
+    text-align: left;
+    max-width: 500px; /* evita que el texto se disperse */
+  }
+
+  .info-section h1 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: #3c2d21;
+  }
+
+  .price {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .desc {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    line-height: 1.7;
+    color: #444;
+  }
+
+  .add-cart-btn {
+    width: 80%;
+    margin-top: 20px;
   }
 }
+
 
 /* ============================== */
 /* 💻 Desktop mejorado */
@@ -265,11 +314,7 @@
     border-radius: 12px;
   }
 
-  .info-section h1 {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-    color: #3c2d21;
-  }
+
 
   .price {
     font-size: 1.3rem;
@@ -291,4 +336,5 @@
   .related-card {
     width: 200px;
   }
+
 }
