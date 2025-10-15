@@ -1,0 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #fff;
+}
+
+.app-layout {
+  min-height: 100vh; /* Toda la altura de la ventana */
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido se expande y empuja el footer hacia abajo */
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* El footer siempre se mantiene al final */
+app-footer {
+  margin-top: auto;
+}

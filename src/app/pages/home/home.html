@@ -48,7 +48,15 @@
           <p class="name">{{ product.name }}</p>
         </div>
         <button class="cart-btn" (click)="addToCart(product, $event)">
-          <img src="assets/icons/bt_add_to_cart.svg" alt="cart" class="icon-40" />
+          <img
+            [src]="
+              addedMap[product.id]
+                ? 'assets/icons/bt_added_to_cart.svg'
+                : 'assets/icons/bt_add_to_cart.svg'
+            "
+            alt="cart"
+            class="icon-40"
+          />
         </button>
       </div>
     </div>

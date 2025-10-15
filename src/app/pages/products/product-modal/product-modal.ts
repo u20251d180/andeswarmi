@@ -21,6 +21,7 @@ export class ProductModalComponent implements OnChanges {
   currentIndex = 0;
   images: string[] = [];
   imagesLoaded: { [key: number]: boolean } = {};
+  isAdded = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['product']) {
@@ -39,6 +40,8 @@ export class ProductModalComponent implements OnChanges {
     }
     this.cart.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
     this.cart.openDrawer();
+    this.isAdded = true;
+    setTimeout(()=> this.isAdded = false, 600);
   }
 
   setupImages() {

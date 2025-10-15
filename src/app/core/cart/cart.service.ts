@@ -29,6 +29,9 @@ export class CartService {
   items$ = this._items$.asObservable();
   private _count$ = new BehaviorSubject<number>(0);
   count$ = this._count$.asObservable();
+  // evento de confirmación al añadir item (emite id del producto añadido)
+  private _itemAdded$ = new BehaviorSubject<number | null>(null);
+  itemAdded$ = this._itemAdded$.asObservable();
 
   constructor() {
     this.load();
@@ -67,6 +70,8 @@ export class CartService {
       this.items.push({ ...item, qty });
     }
     this.save();
+    // emitir evento de añadido
+    this._itemAdded$.next(item.id);
   }
 
   removeItem(id: number) {

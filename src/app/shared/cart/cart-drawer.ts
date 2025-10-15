@@ -34,12 +34,14 @@ import { Subscription } from 'rxjs';
   styles: [
     `.cart-drawer{position:fixed;right:-360px;top:0;height:100vh;width:360px;background:#fff;box-shadow:-8px 0 24px rgba(0,0,0,.12);z-index:1200;transition:right .25s ease;padding:12px;display:flex;flex-direction:column}
      .cart-drawer.open{right:0}
-     .cart-header{display:flex;align-items:center;justify-content:space-between;padding:8px 4px}
+     .cart-header{display:flex;align-items:center;justify-content:space-between;padding:8px 4px;color:#523B2B}
      .cart-body{flex:1;overflow:auto;padding:8px}
-     .cart-item{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid #eee}
+     .cart-item{display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid #eee; color:#523B2B}
      .cart-item img{width:64px;height:64px;object-fit:cover;border-radius:6px}
      .cart-item .info{flex:1}
-     .cart-item .remove{background:transparent;border:0;font-size:20px}
+     .checkout{background:#523B2B;color:#fff;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;transition:background .2s ease}
+     .close{color: #523B2B; border:none; border-radius: 100%; width: 32px; height:32px}
+     .cart-item .remove{background:transparent;border:0;font-size:20px; color: #523B2B}
      .cart-footer{padding:12px;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-between}
      .cart-backdrop{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:1100}
   `]

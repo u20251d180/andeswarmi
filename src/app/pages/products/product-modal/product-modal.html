@@ -68,7 +68,11 @@
     <!-- Footer con botón -->
     <div class="product-footer">
       <button class="add-cart-btn" aria-label="Add to cart" (click)="addToCart(product)">
-        <img src="assets/icons/bt_add_to_cart.svg" alt="cart" class="btn-icon" />
+        <img
+          [src]="isAdded ? 'assets/icons/bt_added_to_cart.svg' : 'assets/icons/bt_add_to_cart.svg'"
+          alt="cart"
+          class="btn-icon"
+        />
         Add to cart
       </button>
     </div>

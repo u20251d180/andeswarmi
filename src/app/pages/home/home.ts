@@ -24,6 +24,7 @@ export class Home {
   filteredProducts: any[] = [];
 
   products: any[] = PRODUCTS;
+  addedMap: Record<number, boolean> = {};
   
   constructor(private router: Router, private cart: CartService, public auth: AuthService) {
     // Inicializar lista filtrada
@@ -40,6 +41,9 @@ export class Home {
     }
     this.cart.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
     this.cart.openDrawer();
+    // efecto visual breve en el botón
+    this.addedMap[product.id] = true;
+    setTimeout(() => { this.addedMap[product.id] = false; }, 600);
   }
 
   applyFilters() {

@@ -1,13 +1,13 @@
 export const PRODUCTS: any[] = [
   {
     id:1,
-    name: 'Cardigan de punto ',
+    name: 'Sueter Cachemira Beige',
     price: 89.90,
-    image: 'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
+    image: 'assets/img/sueter_cachemira_beige.png ',
     images: [
-      'assets/img/Cardigan_de_punto_con_patrones_geometricos.png',
+      'assets/img/sueter_cachemira_beige.png ',
     ],
-    description: 'Cardigan de punto con patrones geométricos, hecho a mano con lana de alpaca peruana.',
+    description: 'Suéter de cachemira color beige, suave y elegante.',
     sold: 48,
     exclusive: false,
     createdAt: '2025-09-10T10:00:00Z'

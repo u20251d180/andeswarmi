@@ -22,7 +22,7 @@ export class Navbar implements OnDestroy {
   private subs: Subscription | null = null;
 
   constructor(public auth: AuthService, private cart: CartService) {
-    this.subs = this.cart.count$.subscribe(c => this.cartCount = c);
+    this.subs = this.cart.count$.subscribe(c => this.cartCount = c) as Subscription;
   }
 
   private updateCount() {

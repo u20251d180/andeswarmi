@@ -16,11 +16,12 @@
      min-width:180px; 
     }
 .aw-footer .logo{
-     width:140px; 
+     width:160px; 
     height:auto;
     display:block;
      margin-bottom:8px; 
      background-color: #fff;
+     border-radius: 10px;
     }
 .aw-footer h4{ 
     margin:0 0 8px; 

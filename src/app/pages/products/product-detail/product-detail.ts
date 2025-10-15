@@ -1,51 +1,67 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../../shared/navbar/navbar';
-import { FooterComponent } from '../../../shared/footer/footer';
 import { CartService } from '../../../core/cart/cart.service';
 import { AuthService } from '../../../core/auth/auth.service';
-import { Router } from '@angular/router';
-import { PRODUCTS } from '../../..//data/products';
+import { PRODUCTS } from '../../../data/products';
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, Navbar, FooterComponent],
+  imports: [CommonModule],
   templateUrl: './product-detail.html',
   styleUrls: ['./product-detail.css']
 })
+
+
 export class ProductDetail implements OnInit {
   product: any;
+  isAdded = false;
+  relatedProducts: any[] = [];
 
-  constructor(private route: ActivatedRoute, private cart: CartService, public auth: AuthService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private cart: CartService,
+    public auth: AuthService
+  ) {}
+  
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.product = this.getProductById(id);
-  }
-
-  getProductById(id: string | null) {
-    const pid = id ? Number(id) : null;
-    const found = PRODUCTS.find(p => p.id === pid);
-    return found || null;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.product = PRODUCTS.find(p => p.id === id);
+    this.relatedProducts = PRODUCTS.filter(p => p.id !== id).slice(0, 4);
   }
 
   addToCart(product: any) {
     if (!this.auth.isLoggedIn) {
-      // redirige a login
       this.router.navigate(['/login']);
       return;
     }
     this.cart.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
-    // abrir drawer para mostrar que se agregó
     this.cart.openDrawer();
-    console.log('Added to cart:', product);
+    this.isAdded = true;
+    setTimeout(() => this.isAdded = false, 600);
+  }
+
+  goToProduct(id: number) {
+    this.router.navigate(['/product', id]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   onImageError(event: Event) {
     const img = event.target as HTMLImageElement;
-    // fallback a una imagen existente para evitar icono roto
-    img.src = 'assets/img/Cardigan_de_punto_con_patrones_geometricos.png';
+    img.src = 'assets/img/default-placeholder.png';
   }
+  @ViewChild('slider') sliderRef!: ElementRef<HTMLDivElement>;
+
+scrollSlider(direction: 'left' | 'right') {
+  const slider = this.sliderRef.nativeElement;
+  const scrollAmount = 250; // distancia por click
+  slider.scrollBy({
+    left: direction === 'left' ? -scrollAmount : scrollAmount,
+    behavior: 'smooth',
+  });
+}
 }

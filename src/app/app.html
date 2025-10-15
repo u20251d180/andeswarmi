@@ -1,9 +1,15 @@
-<app-navbar></app-navbar>
-<!-- Tu navbar global -->
-<router-outlet></router-outlet>
-<!-- Aquí se cargan las vistas -->
+<div class="app-layout">
+  <!-- Navbar global -->
+  <app-navbar></app-navbar>
 
-<app-footer></app-footer>
+  <!-- Contenido dinámico -->
+  <div class="app-content">
+    <router-outlet></router-outlet>
+  </div>
 
-<!-- Drawer del carrito disponible globalmente -->
-<app-cart-drawer></app-cart-drawer>
+  <!-- Footer global -->
+  <app-footer></app-footer>
+
+  <!-- Drawer del carrito -->
+  <app-cart-drawer></app-cart-drawer>
+</div>

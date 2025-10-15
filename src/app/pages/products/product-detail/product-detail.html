@@ -15,9 +15,32 @@
       <p class="desc">{{ product?.description }}</p>
 
       <button class="add-cart-btn" (click)="addToCart(product)">
-        <img src="assets/icons/bt_add_to_cart.svg" alt="cart" />
+        <img
+          [src]="isAdded ? 'assets/icons/bt_added_to_cart.svg' : 'assets/icons/bt_add_to_cart.svg'"
+          alt="cart"
+        />
         Add to cart
       </button>
+    </div>
+  </section>
+
+  <!-- Sección de productos relacionados -->
+  <section class="related-section" *ngIf="relatedProducts.length">
+    <h2 class="recommend">También te puede gustar</h2>
+    <div class="slider-wrapper">
+      <button class="arrow left" (click)="scrollSlider('left')">&#10094;</button>
+
+      <div class="related-slider" #slider>
+        <div class="related-card" *ngFor="let p of relatedProducts" (click)="goToProduct(p.id)">
+          <img [src]="p.image" [alt]="p.name" class="related-img" />
+          <div class="related-info">
+            <p class="related-name">{{ p.name }}</p>
+            <p class="related-price">$ {{ p.price }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="arrow right" (click)="scrollSlider('right')">&#10095;</button>
     </div>
   </section>
 </main>

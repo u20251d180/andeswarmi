@@ -1,17 +1,16 @@
+<!-- HEADER NAVBAR -->
 <header class="aw-navbar">
-  <!-- Botón Menú -->
+  <!-- Botón hamburguesa (solo mobile) -->
   <button class="icon-btn menu-btn" (click)="toggleSidebar()" aria-label="Open menu">
     <img class="icon" src="assets/icons/icon_menu.svg" alt="menu" />
   </button>
 
   <!-- Logo -->
   <a routerLink="/" class="brand" aria-label="Home">
-    <div class="brand-inner">
-      <img class="aw-logo" src="assets/logos/andeswarmi-logo.svg" alt="AndesWarmi" />
-    </div>
+    <img class="aw-logo" src="assets/logos/andeswarmi-logo.svg" alt="AndesWarmi" />
   </a>
 
-  <!-- Categorías Desktop -->
+  <!-- Categorías solo desktop -->
   <nav class="nav-cats">
     <button class="chip active">Todos</button>
     <button class="chip">Mujeres</button>
@@ -26,63 +25,67 @@
     <!-- Visitante -->
     <a *ngIf="!auth.isLoggedIn" routerLink="/login" class="signin">Sign in</a>
 
-    <!-- Usuario logueado -->
+    <!-- Usuario logueado con dropdown -->
     <ng-container *ngIf="auth.isLoggedIn">
       <div class="user-menu" (click)="toggleUserMenu()" [class.open]="userMenuOpen">
         <span class="user-email">{{ auth.currentUser?.email }}</span>
         <i class="fa-solid fa-chevron-down"></i>
 
+        <!-- Dropdown -->
         <div class="user-dropdown" *ngIf="userMenuOpen">
           <a routerLink="/account" class="dropdown-item">My account</a>
           <a routerLink="/orders" class="dropdown-item">My orders</a>
-          <a *ngIf="auth.isAdmin" routerLink="/admin" class="dropdown-item">Admin Panel</a>
           <button (click)="logout()" class="dropdown-item">Sign out</button>
         </div>
       </div>
     </ng-container>
 
     <!-- Carrito -->
-    <button class="icon-btn" (click)="openCart()" aria-label="Abrir carrito">
-      <img class="icon" src="assets/icons/icon_shopping_cart.svg" alt="cart" />
+    <button class="icon-btn cart-button" aria-label="Cart" (click)="openCart()">
+      <img class="icon" src="assets/icons/icon_shopping_cart_notification.svg" alt="cart" />
       <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
     </button>
   </div>
 </header>
 
-<!-- 🔹 Fondo oscuro -->
+<!-- SIDEBAR (solo mobile) -->
 <div class="sidebar-backdrop" *ngIf="sidebarOpen" (click)="toggleSidebar()"></div>
 
-<!-- 🔹 Sidebar (menú lateral) -->
 <aside class="sidebar" [class.open]="sidebarOpen">
   <div class="sidebar-header">
-    <h3>CATEGORIES</h3>
+    <h6 style="color: #523b2b; font-weight: bold">CATEGORIAS</h6>
     <button class="close-btn" (click)="toggleSidebar()">✕</button>
   </div>
 
   <nav class="sidebar-menu">
-    <a class="sidebar-link" (click)="toggleSidebar()">All</a>
-    <a class="sidebar-link" (click)="toggleSidebar()">Women</a>
-    <a class="sidebar-link" (click)="toggleSidebar()">Men</a>
-    <a class="sidebar-link" (click)="toggleSidebar()">Ponchos</a>
-    <a class="sidebar-link" (click)="toggleSidebar()">Cardigans</a>
-    <a class="sidebar-link" (click)="toggleSidebar()">Others</a>
+    <!-- ✅ Categorías SIEMPRE visibles -->
+    <a class="sidebar-link" href="#">Todos</a>
+    <a class="sidebar-link" href="#">Mujeres</a>
+    <a class="sidebar-link" href="#">Hombres</a>
+    <a class="sidebar-link" href="#">Ponchos</a>
+    <a class="sidebar-link" href="#">Cardigans</a>
+    <a class="sidebar-link" href="#">Otros</a>
+
+    <hr />
+
+    <!-- 🔹 Opciones de usuario: condicional -->
+    <!-- Visitante -->
+    <a *ngIf="!auth.isLoggedIn" routerLink="/login" class="sidebar-link" (click)="toggleSidebar()">
+      Log in
+    </a>
+
+    <!-- Usuario autenticado -->
+    <ng-container *ngIf="auth.isLoggedIn">
+      <a routerLink="/orders" class="sidebar-link" (click)="toggleSidebar()">My orders</a>
+      <a routerLink="/account" class="sidebar-link" (click)="toggleSidebar()">My account</a>
+      <p class="user-email">{{ auth.currentUser?.email }}</p>
+      <button
+        class="sidebar-link"
+        style="background: none; border: 0; padding: 0; text-align: left"
+        (click)="logout()"
+      >
+        Sign out
+      </button>
+    </ng-container>
   </nav>
-
-  <hr class="sidebar-divider" />
-
-  <!-- 🔹 Opciones según sesión -->
-  <div *ngIf="auth.isLoggedIn; else guestLinks" class="sidebar-user">
-    <a class="sidebar-link" routerLink="/orders" (click)="toggleSidebar()">My orders</a>
-    <a class="sidebar-link" routerLink="/account" (click)="toggleSidebar()">My account</a>
-
-    <div class="sidebar-email">{{ auth.currentUser?.email }}</div>
-    <button class="logout-btn" (click)="logout()">Sign out</button>
-  </div>
-
-  <!-- 🔹 Invitado -->
-  <ng-template #guestLinks>
-    <div class="sidebar-guest">
-      <a class="sidebar-link" routerLink="/login" (click)="toggleSidebar()">Log in</a>
-    </div>
-  </ng-template>
 </aside>
