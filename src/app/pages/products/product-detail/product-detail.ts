@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/cart/cart.service';
@@ -15,10 +16,13 @@ import { ViewChild, ElementRef } from '@angular/core';
 })
 
 
-export class ProductDetail implements OnInit {
+export class ProductDetail implements OnInit, OnDestroy {
   product: any;
   isAdded = false;
   relatedProducts: any[] = [];
+  private sub: any;
+  cartOpen = false;
+  private cartSub: Subscription | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,9 +33,24 @@ export class ProductDetail implements OnInit {
   
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = PRODUCTS.find(p => p.id === id);
+    this.sub = this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      this.loadProduct(id);
+    });
+    // subscribir al estado del drawer del carrito para ocultar el botón de cerrar
+    this.cartSub = this.cart.drawerOpen$.subscribe(v => this.cartOpen = !!v);
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe?.();
+    this.cartSub?.unsubscribe?.();
+  }
+
+  private loadProduct(id: number) {
+    this.product = PRODUCTS.find(p => p.id === id) || null;
     this.relatedProducts = PRODUCTS.filter(p => p.id !== id).slice(0, 4);
+    // scroll al top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   addToCart(product: any) {
@@ -46,8 +65,12 @@ export class ProductDetail implements OnInit {
   }
 
   goToProduct(id: number) {
+    // navegar a la misma ruta con otro id -> la suscripción recargará el producto
     this.router.navigate(['/product', id]);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  backToHome() {
+    this.router.navigate(['/']);
   }
 
   onImageError(event: Event) {

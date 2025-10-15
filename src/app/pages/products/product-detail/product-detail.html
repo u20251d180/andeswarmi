@@ -1,6 +1,9 @@
 <main class="product-page">
   <section class="product-container">
     <div class="image-section">
+      <button *ngIf="!cartOpen" class="back-btn" aria-label="Volver" (click)="backToHome()">
+        <img src="assets/icons/icon_close.svg" alt="Cerrar" />
+      </button>
       <img
         [src]="product?.image"
         [alt]="product?.name"
