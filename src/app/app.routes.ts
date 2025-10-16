@@ -1,6 +1,7 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { AuthGuard, AdminGuard } from './core/auth/auth.guard';
+import { AccountComponent } from './pages/account/account.component';
 
 export const routes: Routes = [
   {
@@ -11,10 +12,8 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./pages/login/login').then(m => m.Login)
   },
-  {
-    path: 'recover-password',
-    loadComponent: () => import('./pages/recovery/recovery').then(m => m.Recovery)
-  },
+   { path: 'account', component: AccountComponent },
+
   {
     path: 'register',
     loadComponent: () => import('./pages/register/register').then(m => m.Register)
@@ -24,11 +23,13 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/orders/orders').then(m => m.Orders),
     canActivate: [AuthGuard]
   },
+  
   {
     path: 'admin',
     loadComponent: () => import('./pages/admin/admin').then(m => m.AdminDashboard),
     canActivate: [AdminGuard]
   },
+
   {
     path: 'product/:id',
     loadComponent: () =>
@@ -36,5 +37,13 @@ export const routes: Routes = [
         m => m.ProductDetail
       )
   },
-  { path: '**', redirectTo: '' }
+{
+  path: 'password-recovery',
+  loadComponent: () =>
+    import('./pages/password-recovery/password-recovery').then(
+      (m) => m.PasswordRecovery
+    )
+},
+{ path: '**', redirectTo: '' }
+
 ];

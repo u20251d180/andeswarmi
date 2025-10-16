@@ -169,3 +169,103 @@ outline: none;
     display: none !important;
   }
 }
+
+/* ============================== */
+/* 🧷 Banner AndesWarmi */
+/* ============================== */
+.aw-banner {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+/* 🌙 Overlay semitransparente */
+.aw-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25); /* 0.35 = nivel de oscuridad (ajustable) */
+  z-index: 1;
+}
+
+.aw-banner picture,
+.aw-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-text {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  z-index: 2;
+  padding: 0 16px;
+
+}
+
+.banner-text h1 {
+  font-size: 1.6rem;
+  font-weight: lighter;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.banner-text p {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.banner-btn {
+  background-color:#666666c4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.banner-btn:hover {
+  background-color: #6d4c36;
+}
+
+/* ============================== */
+/* 💻 Desktop */
+@media (min-width: 768px) {
+  .aw-banner {
+    height: 75vh;
+    margin-bottom: 40px;
+  }
+
+  .banner-text {
+    text-align: left;
+    left: 8%;
+    transform: translateY(-50%);
+    max-width: 480px;
+  }
+
+  .banner-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .banner-text p {
+    font-size: 1.1rem;
+  }
+
+  .banner-btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+  }
+}

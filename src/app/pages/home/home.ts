@@ -45,6 +45,13 @@ export class Home {
     this.addedMap[product.id] = true;
     setTimeout(() => { this.addedMap[product.id] = false; }, 600);
   }
+  scrollToProducts() {
+  const section = document.getElementById('productos');
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 
   applyFilters() {
     const term = this.searchTerm.trim().toLowerCase();

@@ -35,13 +35,22 @@
             
          
         }
-           .form a{
-            color: var(--hospital-green);
-            text-decoration: none;
-            font-size: var(--sm);
-            text-align: center;
-            margin-bottom: 52px;
-        }
+            .form a{
+  color: #3c2b21;          /* o tu color */
+ text-decoration: none;
+  font-size: var(--sm);
+  text-align: center;
+  margin-bottom: 52px;
+}
+  .form a:hover{
+  color: #3c2b21;      
+  text-decoration: underline;
+   /* o tu color */
+  /* sin text-decoration */
+  font-size: var(--sm);
+  text-align: center;
+  margin-bottom: 52px;
+}
 
         .form div{
            display: flex;

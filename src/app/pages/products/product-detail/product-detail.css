@@ -19,8 +19,9 @@
 
 .back-btn{
   position: absolute;
-  top: 18px;
-  right: 18px;
+
+  top: 13px;
+  left: 10px;
   border: none;
   width:48px;
   height:48px;
@@ -30,7 +31,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:9999; /* muy por encima para evitar solapamiento */
+  z-index:900; /* debe quedar POR DEBAJO del sidebar(999) y drawer(1200) */
   box-shadow: 0 10px 26px rgba(0,0,0,0.14);
   transition: transform .18s ease, box-shadow .18s ease;
 }
@@ -249,6 +250,8 @@ font-weight: 500;
   .image-section {
     display: flex;
     justify-content: flex-end; /* centra mejor la imagen */
+    /* permitir que el botón quede dentro de la esquina de la imagen */
+    position: relative;
   }
 
   .product-img {
@@ -258,6 +261,9 @@ font-weight: 500;
     border-radius: 12px;
     object-fit: contain;
   }
+
+  /* mover ligeramente el back-btn en desktop para que quede dentro del padding del layout */
+  .back-btn{ left: 28px; top: 28px }
 
   .info-section {
     text-align: left;

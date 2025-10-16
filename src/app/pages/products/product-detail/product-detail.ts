@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/cart/cart.service';
@@ -21,8 +20,6 @@ export class ProductDetail implements OnInit, OnDestroy {
   isAdded = false;
   relatedProducts: any[] = [];
   private sub: any;
-  cartOpen = false;
-  private cartSub: Subscription | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,13 +34,10 @@ export class ProductDetail implements OnInit, OnDestroy {
       const id = Number(params.get('id'));
       this.loadProduct(id);
     });
-    // subscribir al estado del drawer del carrito para ocultar el botón de cerrar
-    this.cartSub = this.cart.drawerOpen$.subscribe(v => this.cartOpen = !!v);
   }
 
   ngOnDestroy() {
     this.sub?.unsubscribe?.();
-    this.cartSub?.unsubscribe?.();
   }
 
   private loadProduct(id: number) {

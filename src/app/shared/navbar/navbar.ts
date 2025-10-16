@@ -1,11 +1,8 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService, AwUser } from '../../core/auth/auth.service';
 import { CartService } from '../../core/cart/cart.service';
-
-// Observables
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,26 +12,35 @@ import { Subscription } from 'rxjs';
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class Navbar implements OnDestroy {
+export class Navbar implements OnInit, OnDestroy {
   sidebarOpen = false;
   userMenuOpen = false;
   cartCount = 0;
-  private subs: Subscription | null = null;
+  user: AwUser | null = null;
 
-  constructor(public auth: AuthService, private cart: CartService) {
-    this.subs = this.cart.count$.subscribe(c => this.cartCount = c) as Subscription;
-  }
+  private subs = new Subscription();
 
-  private updateCount() {
-    const items = this.cart.getItems();
-    this.cartCount = items.reduce((s, i) => s + i.qty, 0);
+  constructor(
+    public auth: AuthService,
+    private cart: CartService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    // Escuchar usuario logueado
+    this.subs.add(
+      this.auth.user$.subscribe(u => {
+        this.user = u;
+        console.log('Usuario actualizado →', u);
+        this.cdr.detectChanges();
+      })
+    );
+
+    // Escuchar carrito
+    this.subs.add(this.cart.count$.subscribe(c => this.cartCount = c));
   }
 
   openCart() { this.cart.openDrawer(); }
-
-  ngOnDestroy() {
-    this.subs?.unsubscribe();
-  }
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
@@ -50,21 +56,21 @@ export class Navbar implements OnDestroy {
     this.userMenuOpen = !this.userMenuOpen;
   }
 
-  // 🔹 Cierra el dropdown si haces click fuera
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.user-menu')) {
-      this.userMenuOpen = false;
-    }
+    if (!target.closest('.user-menu')) this.userMenuOpen = false;
   }
 
-  // 🔹 NUEVO: cierra el sidebar al pasar a modo escritorio
   @HostListener('window:resize', [])
   onResize() {
     if (window.innerWidth > 1023 && this.sidebarOpen) {
       this.sidebarOpen = false;
       document.body.classList.remove('sidebar-open');
     }
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }

@@ -1,6 +1,6 @@
 <!-- HEADER NAVBAR -->
 <header class="aw-navbar">
-  <!-- Botón hamburguesa (solo mobile) -->
+  <!-- Botón hamburguesa -->
   <button class="icon-btn menu-btn" (click)="toggleSidebar()" aria-label="Open menu">
     <img class="icon" src="assets/icons/icon_menu.svg" alt="menu" />
   </button>
@@ -10,7 +10,7 @@
     <img class="aw-logo" src="assets/logos/andeswarmi-logo.svg" alt="AndesWarmi" />
   </a>
 
-  <!-- Categorías solo desktop -->
+  <!-- Categorías Desktop -->
   <nav class="nav-cats">
     <button class="chip active">Todos</button>
     <button class="chip">Mujeres</button>
@@ -23,19 +23,19 @@
   <!-- Acciones -->
   <div class="actions">
     <!-- Visitante -->
-    <a *ngIf="!auth.isLoggedIn" routerLink="/login" class="signin">Sign in</a>
+    <a *ngIf="!user" routerLink="/login" class="signin">Iniciar sesión</a>
 
-    <!-- Usuario logueado con dropdown -->
-    <ng-container *ngIf="auth.isLoggedIn">
+    <!-- Usuario logueado -->
+    <ng-container *ngIf="user">
       <div class="user-menu" (click)="toggleUserMenu()" [class.open]="userMenuOpen">
-        <span class="user-email">{{ auth.currentUser?.email }}</span>
+        <span class="user-email">{{ user.email }}</span>
         <i class="fa-solid fa-chevron-down"></i>
 
         <!-- Dropdown -->
         <div class="user-dropdown" *ngIf="userMenuOpen">
-          <a routerLink="/account" class="dropdown-item">My account</a>
-          <a routerLink="/orders" class="dropdown-item">My orders</a>
-          <button (click)="logout()" class="dropdown-item">Sign out</button>
+          <a routerLink="/account" class="dropdown-item">Mi cuenta</a>
+          <a routerLink="/orders" class="dropdown-item">Mis pedidos</a>
+          <button (click)="logout()" class="dropdown-item">Salir</button>
         </div>
       </div>
     </ng-container>
@@ -48,8 +48,7 @@
   </div>
 </header>
 
-<!-- SIDEBAR (solo mobile) -->
-<div class="sidebar-backdrop" *ngIf="sidebarOpen" (click)="toggleSidebar()"></div>
+<!-- SIDEBAR (mobile) -->
 
 <aside class="sidebar" [class.open]="sidebarOpen">
   <div class="sidebar-header">
@@ -58,7 +57,6 @@
   </div>
 
   <nav class="sidebar-menu">
-    <!-- ✅ Categorías SIEMPRE visibles -->
     <a class="sidebar-link" href="#">Todos</a>
     <a class="sidebar-link" href="#">Mujeres</a>
     <a class="sidebar-link" href="#">Hombres</a>
@@ -68,24 +66,40 @@
 
     <hr />
 
-    <!-- 🔹 Opciones de usuario: condicional -->
-    <!-- Visitante -->
-    <a *ngIf="!auth.isLoggedIn" routerLink="/login" class="sidebar-link" (click)="toggleSidebar()">
-      Log in
-    </a>
+    <a *ngIf="!user" routerLink="/login" class="sidebar-link" (click)="toggleSidebar()"
+      >Iniciar Sesión</a
+    >
 
-    <!-- Usuario autenticado -->
-    <ng-container *ngIf="auth.isLoggedIn">
-      <a routerLink="/orders" class="sidebar-link" (click)="toggleSidebar()">My orders</a>
-      <a routerLink="/account" class="sidebar-link" (click)="toggleSidebar()">My account</a>
-      <p class="user-email">{{ auth.currentUser?.email }}</p>
-      <button
-        class="sidebar-link"
-        style="background: none; border: 0; padding: 0; text-align: left"
-        (click)="logout()"
-      >
-        Sign out
-      </button>
+    <ng-container *ngIf="user">
+      <a routerLink="/orders" class="sidebar-link" (click)="toggleSidebar()">Mis pedidos</a>
+      <div class="sidebar-backdrop" *ngIf="sidebarOpen" (click)="toggleSidebar()"></div>
+      <a routerLink="/account" class="menu-item" (click)="toggleSidebar()">Mi cuenta</a>
+      <!-- 🔹 Mostrar correo del usuario -->
+      <div *ngIf="user" class="sidebar-user">
+        <p
+          class="user-email"
+          style="
+            color: #523b2b;
+            font-weight: lighter;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 1em;
+            margin-top: 1.5em;
+          "
+        >
+          {{ user.email }}
+        </p>
+
+        <button
+          class="sidebar-link"
+          style="background: none; border: 0; padding: 0; text-align: left; font-size: 16px"
+          (click)="logout()"
+        >
+          Salir
+        </button>
+      </div>
     </ng-container>
   </nav>
 </aside>

@@ -1,0 +1,38 @@
+<section class="login">
+  <div class="form-container">
+    <img src="assets/logos/andeswarmi-logo.svg" alt="AndesWarmi" class="logo" />
+
+    <!-- Modo visualización -->
+    <div *ngIf="!isEditing" class="form view-mode">
+      <h2 class="title">Mi cuenta</h2>
+
+      <label class="label">Nombre</label>
+      <p class="input readonly">{{ user.name }}</p>
+
+      <label class="label">Email</label>
+      <p class="input readonly">{{ user.email }}</p>
+
+      <label class="label">Contraseña</label>
+      <p class="input readonly">{{ user.password }}</p>
+
+      <button class="primary-button login-button" (click)="toggleEdit()">Editar</button>
+    </div>
+
+    <!-- Modo edición -->
+    <form *ngIf="isEditing" (ngSubmit)="saveChanges()" class="form edit-mode">
+      <h2 class="title">Editar cuenta</h2>
+
+      <label class="label">Nombre</label>
+      <input class="input" type="text" [(ngModel)]="user.name" name="name" required />
+
+      <label class="label">Email</label>
+      <input class="input" type="email" [(ngModel)]="user.email" name="email" required />
+
+      <label class="label">Contraseña</label>
+      <input class="input" type="password" [(ngModel)]="user.password" name="password" required />
+
+      <button type="submit" class="primary-button login-button">Guardar</button>
+      <button type="button" class="secondary-button" (click)="toggleEdit()">Cancelar</button>
+    </form>
+  </div>
+</section>

@@ -1,6 +1,21 @@
 <!-- src/app/pages/home/home.html -->
 
 <main class="container">
+  <section class="aw-banner">
+    <picture>
+      <!-- 📱 Versión móvil -->
+      <source srcset="assets/img/banner-andeswarmi.png" media="(max-width: 768px)" />
+      <!-- 💻 Versión desktop -->
+      <img src="assets/img/portada-origenes.png" alt="Banner AndesWarmi" class="banner-img" />
+    </picture>
+
+    <div class="banner-text">
+      <h1>Descubre el origen de la calidez</h1>
+      <p>Prendas elaboradas con fibras de alpaca y vicuña 100% peruanas.</p>
+      <button (click)="scrollToProducts()" class="banner-btn">Explorar colección</button>
+    </div>
+  </section>
+
   <!-- Topbar: Search + Order -->
   <div class="topbar">
     <div class="search-wrap">
@@ -33,7 +48,7 @@
   <div class="container" style="margin: 10px 16px; align-items: center; display: flex; gap: 12px">
     <div class="results-muted">{{ filteredProducts.length }} resultados</div>
   </div>
-
+  <div id="productos"></div>
   <!-- Grid de productos -->
   <section class="cards-container">
     <div
