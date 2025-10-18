@@ -10,7 +10,8 @@ export const PRODUCTS: any[] = [
     description: 'Suéter de cachemira color beige, suave y elegante.',
     sold: 48,
     exclusive: false,
-    createdAt: '2025-09-10T10:00:00Z'
+    createdAt: '2025-09-10T10:00:00Z',
+    category: 'Mujeres'
   },
   {
     id:2,
@@ -23,7 +24,8 @@ export const PRODUCTS: any[] = [
     description: 'Gorro abrigador hecho con lana de alpaca peruana.',
     sold: 120,
     exclusive: false,
-    createdAt: '2025-09-20T11:30:00Z'
+    createdAt: '2025-09-20T11:30:00Z',
+    category: 'Otros'
   },
   {
     id:3,
@@ -34,7 +36,8 @@ export const PRODUCTS: any[] = [
     description: 'Poncho tradicional con diseño andino.',
     sold: 15,
     exclusive: true,
-    createdAt: '2025-08-02T09:00:00Z'
+    createdAt: '2025-08-02T09:00:00Z',
+    category: 'Ponchos'
   },
   {
     id:4,
@@ -45,7 +48,8 @@ export const PRODUCTS: any[] = [
     description: 'Poncho de alpaca en color taupe, elegante y cálido.',
     sold: 30,
     exclusive: false,
-    createdAt: '2025-07-15T08:00:00Z'
+    createdAt: '2025-07-15T08:00:00Z',
+    category: 'Mujeres'
   },
   {
     id:5,
@@ -56,7 +60,8 @@ export const PRODUCTS: any[] = [
     description: 'Poncho beige con patrones geométricos, hecho a mano con lana de alpaca.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Mujeres'
   },
   {
     id:6,
@@ -67,7 +72,8 @@ export const PRODUCTS: any[] = [
     description: 'Cardigan tradicional color mostaza, cómodo y moderno.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Cardigans'
   },
   {
     id:7,
@@ -78,7 +84,8 @@ export const PRODUCTS: any[] = [
     description: 'Polera beige unisex hecha con lana de alpaca, suave y cálida.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: ['Mujeres','Hombres']
   },
   {
     id:8,
@@ -89,7 +96,8 @@ export const PRODUCTS: any[] = [
     description: 'Ruana andina multicolor hecha con lana de alpaca. Perfecta para abrigarte con estilo. Hecho a mano.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Ponchos'
   },
   {
     id:9,
@@ -100,7 +108,8 @@ export const PRODUCTS: any[] = [
     description: 'Poncho tradicional con diseño andino. Ideal para cualquier ocasión. Hecho a mano con lana de alpaca.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Ponchos'
   },
   {
     id:10,
@@ -111,7 +120,8 @@ export const PRODUCTS: any[] = [
     description: 'Suéter beige con patrón Fair Isle, hecho con lana de alpaca peruana.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Mujeres'
   },
   {
     id:11,
@@ -122,7 +132,8 @@ export const PRODUCTS: any[] = [
     description: 'Bufanda tejida a mano con diseño Inti Raymi, hecha con lana de alpaca peruana.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: 'Otros'
   },
   {
     id:12,
@@ -133,6 +144,7 @@ export const PRODUCTS: any[] = [
     description: 'Suéter abrigador de lana unisex.',
     sold: 5,
     exclusive: true,
-    createdAt: '2025-09-25T14:00:00Z'
+    createdAt: '2025-09-25T14:00:00Z',
+    category: ['Mujeres','Hombres']
   }
 ];

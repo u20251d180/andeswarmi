@@ -12,12 +12,14 @@
 
   <!-- Categorías Desktop -->
   <nav class="nav-cats">
-    <button class="chip active">Todos</button>
-    <button class="chip">Mujeres</button>
-    <button class="chip">Hombres</button>
-    <button class="chip">Ponchos</button>
-    <button class="chip">Cardigans</button>
-    <button class="chip">Otros</button>
+    <button
+      *ngFor="let cat of categories"
+      (click)="selectCategory(cat)"
+      [class.active]="cat === activeCategory"
+      class="chip"
+    >
+      {{ cat }}
+    </button>
   </nav>
 
   <!-- Acciones -->
@@ -52,17 +54,19 @@
 
 <aside class="sidebar" [class.open]="sidebarOpen">
   <div class="sidebar-header">
-    <h6 style="color: #523b2b; font-weight: bold">CATEGORIAS</h6>
+    <h3>Categorías</h3>
     <button class="close-btn" (click)="toggleSidebar()">✕</button>
   </div>
 
   <nav class="sidebar-menu">
-    <a class="sidebar-link" href="#">Todos</a>
-    <a class="sidebar-link" href="#">Mujeres</a>
-    <a class="sidebar-link" href="#">Hombres</a>
-    <a class="sidebar-link" href="#">Ponchos</a>
-    <a class="sidebar-link" href="#">Cardigans</a>
-    <a class="sidebar-link" href="#">Otros</a>
+    <a
+      *ngFor="let category of categories"
+      class="sidebar-link"
+      [class.active]="category === activeCategory"
+      (click)="selectCategory(category); toggleSidebar()"
+    >
+      {{ category }}
+    </a>
 
     <hr />
 
