@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/cart/cart.service';
 import { AuthService } from '../../../core/auth/auth.service';
-import { PRODUCTS } from '../../../data/products';
+import { Product } from '../../../service/product';
 import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -25,7 +25,8 @@ export class ProductDetail implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private cart: CartService,
-    public auth: AuthService
+    public auth: AuthService,
+    private productService: Product // 💉 Inyectamos el servicio de productos
   ) {}
   
 
@@ -41,9 +42,15 @@ export class ProductDetail implements OnInit, OnDestroy {
   }
 
   private loadProduct(id: number) {
-    this.product = PRODUCTS.find(p => p.id === id) || null;
-    this.relatedProducts = PRODUCTS.filter(p => p.id !== id).slice(0, 4);
-    // scroll al top
+    // Usamos el servicio para obtener el producto desde la API
+    this.productService.obtenerproducto(id).subscribe(product => {
+      this.product = product;
+      // Opcional: Cargar productos relacionados también desde la API
+      if (product) {
+        this.productService.listarProductos()
+          .subscribe(allProducts => this.relatedProducts = allProducts.filter(p => p.id !== id).slice(0, 4));
+      }
+    });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

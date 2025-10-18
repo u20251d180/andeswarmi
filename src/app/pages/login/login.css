@@ -107,3 +107,27 @@ body{
                 width: inherit;
             }
         }
+
+.error-message{
+  color: #b00020; /* rojo accesible */
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* estado visual para inputs inválidos */
+.input-invalid{
+  border: 1px solid #f44336; /* border rojo */
+  box-shadow: 0 0 0 3px rgba(244,67,54,0.06); /* ligero halo */
+}
+
+/* botón inactivo */
+.primary-button[disabled],
+.primary-button:disabled{
+  background-color: #e9e9e9;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}
+
+.input.input-email, .input.input-password{
+  border: 1px solid transparent;
+}

@@ -1,7 +1,7 @@
 <div class="login">
   <div class="form-container">
     <!-- Formulario -->
-    <form class="form" (ngSubmit)="onSubmit()">
+    <form #form="ngForm" class="form" (ngSubmit)="onSubmit(form)" novalidate>
       <h2 class="title">Iniciar Sesión</h2>
       <!-- Email -->
       <label for="email" class="label" style="color: #523b2b">Email</label>
@@ -10,10 +10,18 @@
         id="email"
         name="email"
         [(ngModel)]="email"
+        #emailModel="ngModel"
         placeholder="Ingrese su email"
         class="input input-email"
+        [class.input-invalid]="emailModel.invalid && (emailModel.touched || submitted)"
         required
       />
+      @if (emailModel.invalid && (emailModel.touched || submitted)) {
+      <div class="error-message">
+        @if (emailModel.errors?.['required']) { <span>El email es obligatorio.</span> } @if
+        (emailModel.errors?.['email']) { <span>Ingrese un email válido.</span> }
+      </div>
+      }
 
       <!-- Password -->
       <label for="password" class="label" style="color: #523b2b">Password</label>
@@ -22,13 +30,27 @@
         id="password"
         name="password"
         [(ngModel)]="password"
+        #pwdModel="ngModel"
         placeholder="*******"
         class="input input-password"
+        [class.input-invalid]="pwdModel.invalid && (pwdModel.touched || submitted)"
         required
       />
+      @if (pwdModel.invalid && (pwdModel.touched || submitted)) {
+      <div class="error-message">
+        @if (pwdModel.errors?.['required']) { <span>La contraseña es obligatoria.</span> }
+      </div>
+      }
 
       <!-- Botón submit -->
       <input type="submit" value="Iniciar Sesión" class="primary-button login-button" />
+
+      <!-- Mensaje de error general (por ejemplo: credenciales incorrectas) -->
+      @if (loginError) {
+      <div class="error-message" style="margin-top: 12px" role="alert" aria-live="assertive">
+        {{ loginError }}
+      </div>
+      }
 
       <!-- Recuperar contraseña -->
       <a routerLink="/password-recovery">Olvidé mi contraseña</a>
