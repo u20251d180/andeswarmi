@@ -21,6 +21,13 @@ body{
             justify-self: center;
             
         }
+        .title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #523b2b;
+  margin-bottom: 48px;
+  text-align: center;
+}
        
         .form{
             display: flex;

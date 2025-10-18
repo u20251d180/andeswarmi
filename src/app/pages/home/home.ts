@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgFor, CommonModule } from '@angular/common';
 import { ProductModalComponent } from '../products/product-modal/product-modal';
-import { PRODUCTS } from '../../data/products';
+import { Product } from '../../service/product';
 import { Router } from '@angular/router';
 import { CartService } from '../../core/cart/cart.service';
 import { AuthService } from '../../core/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -23,15 +24,31 @@ export class Home {
   sortOption: string = 'recent';
   filteredProducts: any[] = [];
 
-  products: any[] = PRODUCTS;
+  products: any[] = [];
   addedMap: Record<number, boolean> = {};
-  
-  constructor(private router: Router, private cart: CartService, public auth: AuthService) {
+  private _sub?: Subscription;
+
+  constructor(private router: Router, private cart: CartService, public auth: AuthService, private ps: Product) {
     // Inicializar lista filtrada
-    this.filteredProducts = [...this.products];
-    // Aplicar orden inicial
-    this.applyFilters();
+    this.filteredProducts = [];
+    // applyFilters se llamará después de cargar los productos
   }
+
+  ngOnInit(): void {
+    // Consumir API de productos y actualizar la vista
+    this._sub = this.ps.listarProductos().subscribe((list: any[]) => {
+      // Si el servicio ya retorna el formato esperado, asignar directamente
+      this.products = list || [];
+      this.filteredProducts = [...this.products];
+      this.applyFilters();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this._sub) this._sub.unsubscribe();
+  }
+
+
 
   addToCart(product: any, event?: MouseEvent) {
     if (event) event.stopPropagation();
@@ -122,4 +139,8 @@ openModal(product: any, event?: MouseEvent) {
     this.showModal = false;
   }
   
+
+
+
 }
+
